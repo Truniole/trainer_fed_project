@@ -1,10 +1,7 @@
 import React, { Component } from "react";
-
 import Button from "@material-ui/core/Button";
-
 import "react-table/react-table.css";
 import SkyLight from "react-skylight";
-
 import AddIcon from "@material-ui/icons/Add";
 import TextField from "@material-ui/core/TextField";
 import SaveIcon from "@material-ui/icons/Save";

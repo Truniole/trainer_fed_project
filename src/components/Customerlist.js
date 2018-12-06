@@ -10,6 +10,7 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import Traininglist from './TrainingList';
 import AddTraining from './AddTraining';
+import TrainingSessions from './TrainingSessions';
 
 class Customerlist extends Component {
     constructor(props) {
@@ -40,7 +41,6 @@ class Customerlist extends Component {
             this.setState({
                 customers: responseData.content
             })
-            console.log(responseData);
         })
     }
     deleteCustomer = (link) => {
@@ -75,8 +75,6 @@ class Customerlist extends Component {
       };
 
     editCustomer = (customer, link) => {
-        console.log(customer);
-        console.log(link);
         fetch(link,
           {method: 'PUT',
           headers: {'Content-Type': 'application/json'},
@@ -84,8 +82,9 @@ class Customerlist extends Component {
           .then(response => {
             this.listCustomers();
           })
-          
-      }
+    }
+    
+
     renderEditable = (cellInfo) => {
         return (
           <div
@@ -103,7 +102,6 @@ class Customerlist extends Component {
           />
         );
       }
-    
     
     render() {
         const columns = [
@@ -139,6 +137,14 @@ class Customerlist extends Component {
         Header: 'Address',
         accessor: 'streetaddress', 
         Cell: this.renderEditable
+        }, {
+            Header: "Training sessions",
+            accessor: "links[2].href",
+            filterable: false,
+            sortable: false,
+            Cell: ({ value }) => (
+            <TrainingSessions trainingID = {value} />
+            )
         }, {
         Header: 'Edit',
         filterable: false,
