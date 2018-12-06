@@ -6,6 +6,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
 import 'react-table/react-table.css'
 import Addcustomer from './AddCustomer';
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 class Customerlist extends Component {
     constructor(props) {
@@ -41,11 +43,27 @@ class Customerlist extends Component {
         })
     }
     deleteCustomer = (link) => {
-        fetch(link, {method: 'DELETE'})
-        .then(response => {
-            this.listCustomers();
-        })
+        confirmAlert({
+            title: "",
+            message: "  Are you sure to delete?",
+            buttons: [
+                {
+                    label: "  Yes  ",
+                    onClick: () => {
+                        fetch(link, { method: "DELETE" })
+                            .then(res => {
+                                this.listCustomers()
+                            })
+                            .catch(err => console.error(err));
+                    }
+                },
+                {
+                    label: "  No  "
+                }
+            ]
+        });
     }
+
     editCustomer = (customer, link) => {
         console.log(customer);
         console.log(link);
