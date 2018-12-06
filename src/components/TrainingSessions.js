@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
-import "react-table/react-table.css";
-import ReactTable from "react-table";
+// import "react-table/react-table.css";
+// import ReactTable from "react-table";
 import SkyLight from "react-skylight";
 import "../App.css";
 import ListIcon from "@material-ui/icons/List";
-import Moment from "moment";
+import 'react-big-calendar/lib/css/react-big-calendar.css';
+import Calendar from './Calendar'
 
 class TrainingSessions extends Component {
     constructor(props){
@@ -24,26 +25,13 @@ class TrainingSessions extends Component {
                     trainings: responseData.content
                 })
             });
+        console.log(this.state.trainings);
         this.addModal.current.show();
     };
-
+    
     render() {
-        const trainingColumns = [
-        {
-            Header: "Date and time",
-            accessor: "date"
-          },
-          {
-            Header: "Duration",
-            accessor: "duration"
-          },
-          {
-            Header: "Activity",
-            accessor: "activity"
-          }];
-          
         const addDialog = {
-            marginTop: "-300px"
+            marginTop: "-500px"
           };
         return(
         <div>
@@ -51,12 +39,12 @@ class TrainingSessions extends Component {
             onClick={() => this.getTrainings(this.props.trainingID)}>
             <ListIcon size="small"/>
         </Button>
-            <SkyLight dialogStyles={addDialog} hideOnOverlayClicked ref={this.addModal} title="Show sessions">
-            <h3>All trainings</h3>
-            <ReactTable filterable={true} defaultPageSize={10} className="-striped -highlight" data={this.state.trainings} columns={trainingColumns}/>
+            <SkyLight dialogStyles={addDialog} hideOnOverlayClicked ref={this.addModal} title="Training sessions">
+                <Calendar appointments={this.state.trainings}/>
             </SkyLight>
         </div>
         )
     }
 }
 export default TrainingSessions;
+
