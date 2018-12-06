@@ -5,7 +5,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Tooltip from '@material-ui/core/Tooltip';
 import 'react-table/react-table.css'
-
+import Addcustomer from './AddCustomer';
 
 class Customerlist extends Component {
     constructor(props) {
@@ -14,6 +14,18 @@ class Customerlist extends Component {
             customers: []
         }
     }
+    addCustomer = (customer) => {
+        fetch("https://customerrest.herokuapp.com/api/customers", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(customer)
+        })
+            .then(res => {
+                this.setState({ showSnack: true, msg: '  Customer Saved Successful √ ' })
+                this.listCustomers()
+            })
+            .catch(err => console.error(err))
+    };
 
     componentDidMount(){
         this.listCustomers();
@@ -112,9 +124,16 @@ class Customerlist extends Component {
                                     </IconButton></Tooltip>)   
           }]
         return(
-        <div>
+         <div className="container"><br />
+                <h1 className="text-center font-weight-bold">Customer List</h1>
+                <div className="center">
+                    <Addcustomer addCustomer={this.addCustomer} listCustomers={this.listCustomers} />
+                </div>
+        
+        
         <ReactTable defaultPageSize={12} filterable={true}data={this.state.customers} columns={columns} />
-        </div>)
+        </div>
+        )
     }
 }
 
