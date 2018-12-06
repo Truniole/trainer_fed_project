@@ -31,8 +31,7 @@ class TrainingSessions extends Component {
         const trainingColumns = [
         {
             Header: "Date and time",
-            accessor: "date",
-            Cell: ({ value }) => Moment(value).format("MMM Do YYYY, h:mm a")
+            accessor: "date"
           },
           {
             Header: "Duration",
@@ -50,9 +49,9 @@ class TrainingSessions extends Component {
         <div>
         <Button style={{ margin: "10px" }} variant="outlined" color="primary" 
             onClick={() => this.getTrainings(this.props.trainingID)}>
-            <ListIcon /> Show trainings
+            <ListIcon size="small"/>
         </Button>
-            <SkyLight dialogStyles={addDialog} hideOnOverlayClicked ref={this.addModal} title="Add new training">
+            <SkyLight dialogStyles={addDialog} hideOnOverlayClicked ref={this.addModal} title="Show sessions">
             <h3>All trainings</h3>
             <ReactTable filterable={true} defaultPageSize={10} className="-striped -highlight" data={this.state.trainings} columns={trainingColumns}/>
             </SkyLight>
