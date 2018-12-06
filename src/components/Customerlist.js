@@ -8,6 +8,7 @@ import 'react-table/react-table.css'
 import Addcustomer from './AddCustomer';
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import Traininglist from './TrainingList';
 
 class Customerlist extends Component {
     constructor(props) {
@@ -121,7 +122,7 @@ class Customerlist extends Component {
               accessor: 'streetaddress', 
               Cell: this.renderEditable
           },{
-            Header: '',
+            Header: 'Edit',
             filterable: false,
             sortable: false,
             accessor: 'links[0].href', 
@@ -131,10 +132,9 @@ class Customerlist extends Component {
                                 </IconButton>)
               
           },  {
-                Header: '',
+                Header: 'Delete',
                 filterable: false,
                 sortable: false,
-                minWidth: 30,
                 accessor: 'links[0].href', 
                 Cell: ({value}) => (<Tooltip title="Delete" placement="right-end">
                                     <IconButton size="small" onClick={() => this.deleteCustomer(value)}>
@@ -142,13 +142,10 @@ class Customerlist extends Component {
                                     </IconButton></Tooltip>)   
           }]
         return(
-         <div className="container"><br />
+         <div className="container-fluid"><br />
                 <h1 className="text-center font-weight-bold">Customer List</h1>
-                <div className="center">
+                    <Traininglist/>
                     <Addcustomer addCustomer={this.addCustomer} listCustomers={this.listCustomers} />
-                </div>
-        
-        
         <ReactTable defaultPageSize={12} filterable={true}data={this.state.customers} columns={columns} />
         </div>
         )

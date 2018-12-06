@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import SkyLight from "react-skylight";
 import TextField from "@material-ui/core/TextField";
 import SaveIcon from "@material-ui/icons/Save";
-
-
+import AddIcon from "@material-ui/icons/Add";
+import Button from "@material-ui/core/Button";
 class Addcustomer extends Component {
     constructor(props) {
         super(props);
@@ -45,7 +45,7 @@ class Addcustomer extends Component {
     render() {
 
         const addDialog = {
-            width: '70%',
+            width: '50%',
             height: '450px',
             marginTop: '-300px',
             marginLeft: '-35%'
@@ -63,18 +63,21 @@ class Addcustomer extends Component {
                         <TextField placeholder="City" onChange={this.handleChange} name="city" /> <br />
                         <TextField placeholder="Email" onChange={this.handleChange} name="email" /> <br />
                         <TextField placeholder="Phone" onChange={this.handleChange} name="phone" /> <br />
-                        <div className="col-md-2">
-                            <button style={{ margin: "10px" }} className="btn btn-primary" onClick={this.handleSubmit}>
-                                <SaveIcon /> Save New Customer
-                            </button>
+                        <div>
+                            <Button style={{ margin: "10px" }} variant="outlined"
+                            color="primary" onClick={this.handleSubmit}>
+                                <SaveIcon /> Add
+                            </Button>
                         </div>
                     </div>
                 </div>
             </SkyLight>
-            <div className="col-md-2">
-                <button style={{ margin: "10px" }} className="btn btn-primary" onClick={() => this.refs.simpleDialog.show()}>
-                    Add Customer
-              </button>
+            <div>
+            
+                <Button style={{ margin: "10px" }} variant="outlined"
+            color="primary" onClick={() => this.refs.simpleDialog.show()}>
+                <AddIcon/> Add Customer
+              </Button>
             </div>
         </div>;
     }
